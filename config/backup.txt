@@ -1,0 +1,33 @@
+,
+        {
+            "table_name": "dim_airport",
+            "schedule_interval": null,
+            "dim_type": "scd2",
+            "columns_nk": ["airport_id", "airport_code", "airport_seq_id"],
+            "columns_detail_old": [
+                [
+                    "OriginAirportID",
+                    "Origin",
+                    "OriginAirportSeqID",
+                    "OriginWac",
+                    "OriginCityName",
+                    "OriginStateName"
+                ],
+                [
+                    "DestAirportID",
+                    "Dest",
+                    "DestAirportSeqID",
+                    "DestWac",
+                    "DestCityName",
+                    "DestStateName"
+                ]
+            ],
+            "columns_detail_new": {
+                "airport_id": "STRING",
+                "airport_code": "STRING",
+                "airport_seq_id": "STRING",
+                "airport_wac": "STRING",
+                "airport_city_name": "STRING",
+                "airport_state_name": "STRING"
+            }
+        }
