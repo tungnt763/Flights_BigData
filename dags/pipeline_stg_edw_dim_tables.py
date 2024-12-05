@@ -8,8 +8,8 @@ import json
 from datetime import datetime, timedelta
 from airflow.decorators import dag, task
 from dags.resources.business.dim.l2_dim_staging import staging_layer
+from dags.resources.business.dim.l3_dim_edw import edw_layer
 from lib.utils import get_rundate as _get_rundate
-# from dags.resources.business.dim.l3_dim_edw import edw_layer
 
 _default_args = {
     'owner': 'tungnt',
@@ -41,9 +41,9 @@ def create_dag(_dag_id, _schedule, **kwargs):
         
         stg_layer = staging_layer(**kwargs)
 
-        # dw_layer = edw_layer(**kwargs)
+        dw_layer = edw_layer(**kwargs)
 
-        get_rundate() >> stg_layer #>> dw_layer
+        get_rundate() >> stg_layer >> dw_layer
 
     return get_dag()
 
@@ -69,6 +69,7 @@ for pipeline in pipelines:
     _columns_detail_old = pipeline.get('columns_detail_old')
     _columns_detail_new = pipeline.get('columns_detail_new')
     _columns_nk = pipeline.get('columns_nk')
+    _columns_nk_new = pipeline.get('columns_nk_new')
 
     cmn_config = {
         "gcp_conn_id": 'gcp',
@@ -81,6 +82,7 @@ for pipeline in pipelines:
         "table_name": _table_name,
         "dim_type": _dim_type,
         "columns_nk": _columns_nk,
+        "columns_nk_new": _columns_nk_new,
         "columns_detail_old": _columns_detail_old,
         "columns_detail_new": _columns_detail_new
     }

@@ -12,6 +12,7 @@
             "schedule_interval": null,
             "dim_type": "scd1",
             "columns_nk": ["Airline"],
+            "columns_nk_new": ["airline_id"],
             "columns_detail_old": [
                 "Airline",
                 "Marketing_Airline_Network",
@@ -28,6 +29,7 @@
             "schedule_interval": null,
             "dim_type": "scd1",
             "columns_nk": ["Marketing_Airline_Network"],
+            "columns_nk_new": ["marketing_airline_id"],
             "columns_detail_old": [
                 "Marketing_Airline_Network",
                 "DOT_ID_Marketing_Airline",
@@ -44,6 +46,7 @@
             "schedule_interval": null,
             "dim_type": "scd1",
             "columns_nk": ["Operating_Airline"],
+            "columns_nk_new": ["operating_airline_id"],
             "columns_detail_old": [
                 "Operating_Airline",
                 "DOT_ID_Operating_Airline",
@@ -60,6 +63,7 @@
             "schedule_interval": null,
             "dim_type": "scd1",
             "columns_nk": ["FlightDate"],
+            "columns_nk_new": ["date"],
             "columns_detail_old": [
                 "FlightDate",
                 "EXTRACT(YEAR FROM CAST(FlightDate AS DATE))",
@@ -82,6 +86,7 @@
             "schedule_interval": null,
             "dim_type": "scd2",
             "columns_nk": ["airport_id", "airport_code", "airport_seq_id"],
+            "columns_nk_new": ["airport_id", "airport_code", "airport_seq_id"],
             "columns_detail_old": [
                 [
                     "OriginAirportID",

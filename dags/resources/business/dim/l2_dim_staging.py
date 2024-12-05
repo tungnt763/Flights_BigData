@@ -16,8 +16,6 @@ def staging_layer(**kwargs):
     _sql_template = os.path.join('resources', 'sql_template', '2_staging', f'{_dim_type}_tables_cmn_stg.sql')
     
     _prms_nk = kwargs.get("columns_nk")
-        # "_columns_detail_old": _columns_detail_old,
-        # "columns_detail_new": _columns_detail_new
     
     _old_cols = kwargs.get("columns_detail_old")
     params = {}
@@ -38,7 +36,7 @@ def staging_layer(**kwargs):
             'serv_table_name': _serv_table_name,
             'old_cols': ',\n\t'.join(_old_cols),
             'nk': ', '.join(_prms_nk),
-            'cast_typed_cols': ',\n\t'.join(_prms_cast_typed_cols)
+            'cast_typed_cols': ',\n'.join(_prms_cast_typed_cols)
         }
     
     else: 
@@ -61,11 +59,11 @@ def staging_layer(**kwargs):
             'my_table_name': _my_table_name,
             'my_serv_dataset': _my_serv_dataset,
             'serv_table_name': _serv_table_name,
-            'old_cols_origin': ',\n\t'.join(_prms_old_cols_origin),
-            'old_cols_dest': ',\n\t'.join(_prms_old_cols_dest),
-            'new_cols': ',\n\t'.join(_prms_new_cols),
+            'old_cols_origin': ',\n'.join(_prms_old_cols_origin),
+            'old_cols_dest': ',\n'.join(_prms_old_cols_dest),
+            'new_cols': ',\n'.join(_prms_new_cols),
             'nk': ', '.join(_prms_nk),
-            'cast_typed_cols': ',\n\t'.join(_prms_cast_typed_cols) 
+            'cast_typed_cols': ',\n'.join(_prms_cast_typed_cols) 
         }
 
     @task(provide_context=True)
