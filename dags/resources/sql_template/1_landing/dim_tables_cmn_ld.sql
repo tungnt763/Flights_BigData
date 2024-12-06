@@ -5,7 +5,7 @@ SET max_ts = TIMESTAMP('{{ task_instance.xcom_pull(task_ids="landing_layer.get_m
 CREATE TABLE IF NOT EXISTS `{{ params.my_project }}.{{ params.my_dataset }}.{{ params.my_table_name }}` (
     {{ params.schema_columns }},
     rundate STRING,
-    insert_dt TIMESTAMP
+    insert_dt DATETIME
 );
 
 -- Xóa dữ liệu nếu max_timestamp là giá trị mặc định
@@ -21,3 +21,5 @@ SELECT
     CURRENT_TIMESTAMP() AS insert_dt
 FROM 
     `{{ params.my_project }}.{{ params.my_dataset }}.{{ params.source_table }}`;
+
+DROP TABLE IF EXISTS `{{ params.my_project }}.{{ params.my_dataset }}.{{ params.my_table_name }}_temp`;

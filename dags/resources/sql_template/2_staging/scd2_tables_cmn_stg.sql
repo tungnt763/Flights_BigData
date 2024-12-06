@@ -34,12 +34,12 @@ WITH table_ld AS (
 )
 SELECT 
     {{ params.cast_typed_cols }},
-    CURRENT_DATE() AS effective_start_dt,
+    CURRENT_DATETIME() AS effective_start_dt,
     DATE('9999-12-31') AS effective_end_dt,
     1 AS active_flg,
     rundate,
-    CURRENT_DATE() AS insert_date,
-    CURRENT_DATE() AS update_date
+    CURRENT_DATETIME() AS insert_date,
+    CURRENT_DATETIME() AS update_date
 FROM 
     table_ld
 WHERE 

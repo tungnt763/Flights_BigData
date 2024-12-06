@@ -14,9 +14,6 @@ def edw_layer(**kwargs):
     _serv_table_name = f'dim_{kwargs.get("table_name")}_stg'
     _dim_type = kwargs.get("dim_type")
 
-    if _dim_type == 'scd2':
-        return
-
     _sql_template = os.path.join('resources', 'sql_template', '3_edw', f'{_dim_type}_tables_cmn_edw.sql')
     
     _prms_nk = kwargs.get("columns_nk_new")
@@ -37,19 +34,31 @@ def edw_layer(**kwargs):
     for nk in _prms_nk:
         _prms_nk_4_condition.append(f"tgt.{nk} = src.{nk}")
 
-    params = {
-        'my_project': _my_project,
-        'my_dataset': _my_dataset,
-        'my_table_name': _my_table_name,
-        'my_serv_dataset': _my_serv_dataset,
-        'serv_table_name': _serv_table_name,
-        'create_typed_cols': ',\n'.join(_prms_create_typed_cols),
-        'select_cols': ',\n'.join(_prms_select_cols),
-        'nk_4_condition': ',\n'.join(_prms_nk_4_condition),
-        'lnk_4_update': ',\n'.join(_prms_lnk_4_update),
-        'ncols_4_insert': ', '.join(_prms_select_cols),
-        'vcols_4_insert': ', '.join(_prms_vcols_4_insert)
-    }
+    if _dim_type == 'scd1':
+        params = {
+            'my_project': _my_project,
+            'my_dataset': _my_dataset,
+            'my_table_name': _my_table_name,
+            'my_serv_dataset': _my_serv_dataset,
+            'serv_table_name': _serv_table_name,
+            'create_typed_cols': ',\n'.join(_prms_create_typed_cols),
+            'select_cols': ',\n'.join(_prms_select_cols),
+            'nk_4_condition': ' AND '.join(_prms_nk_4_condition),
+            'lnk_4_update': ',\n'.join(_prms_lnk_4_update),
+            'ncols_4_insert': ', '.join(_prms_select_cols),
+            'vcols_4_insert': ', '.join(_prms_vcols_4_insert)
+        }
+    else: 
+        params = {
+            'my_project': _my_project,
+            'my_dataset': _my_dataset,
+            'my_table_name': _my_table_name,
+            'my_serv_dataset': _my_serv_dataset,
+            'serv_table_name': _serv_table_name,
+            'create_typed_cols': ',\n'.join(_prms_create_typed_cols),
+            'select_cols': ',\n'.join(_prms_select_cols),
+            'nk_4_condition': ' AND '.join(_prms_nk_4_condition)
+        }
 
 
     @task(provide_context=True)

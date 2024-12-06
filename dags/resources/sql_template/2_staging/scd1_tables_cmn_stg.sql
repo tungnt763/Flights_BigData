@@ -22,7 +22,7 @@ CREATE TABLE {{ params.my_project }}.{{ params.my_dataset }}.{{ params.my_table_
         {{ params.cast_typed_cols }},
         -- Audit cols base on SCD1
         rundate,
-        CURRENT_TIMESTAMP AS insert_dt,
-        CURRENT_TIMESTAMP AS update_dt
+        CURRENT_DATETIME AS insert_dt,
+        CURRENT_DATETIME AS update_dt
     FROM table_ld
     WHERE _rnk = 1;

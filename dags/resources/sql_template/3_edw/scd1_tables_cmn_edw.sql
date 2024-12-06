@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS {{ params.my_project }}.{{ params.my_dataset }}.{{ pa
     {{ params.create_typed_cols }},
     -- Audit cols base on SCD2
     rundate STRING,
-    insert_dt TIMESTAMP,
-    update_dt TIMESTAMP
+    insert_dt DATETIME,
+    update_dt DATETIME
 );
 
 -- Fetch the maximum timestamp from the XCom variable
