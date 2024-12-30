@@ -1,6 +1,0 @@
-apache-airflow-providers-amazon==7.4.0
-dbt-postgres==1.4.6
-astronomer-cosmos==0.6.8
-pandas
-pyspark==3.2.0
-apache-airflow-providers-google==10.26.0
