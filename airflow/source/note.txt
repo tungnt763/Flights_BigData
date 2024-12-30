@@ -1,0 +1,4 @@
+df - spark.read.option('header', 'true').csv('/opt/airflow/source/time.csv')
+
+df.write.option('header', 'true').mode('overwrite').csv('hdfs://namenode:9000/time')
+
