@@ -3,6 +3,9 @@ from airflow.operators.bash_operator import BashOperator # type: ignore
 from airflow.operators.python_operator import PythonOperator # type: ignore
 from datetime import timedelta
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, IntegerType
+
+
 
 default_args = {
     "owner": "airflow",
@@ -20,13 +23,26 @@ dag = DAG("elt", default_args=default_args, schedule_interval="*/3 * * * *", max
 year = 2030
 month = 1
 
+# spark = SparkSession.builder.appName("Get time from HDFS").getOrCreate()
+# Khởi tạo SparkSession
 spark = SparkSession.builder.appName("Get time from HDFS").getOrCreate()
+
+# Định nghĩa schema thủ công
+# schema = StructType([
+#     StructField("year", IntegerType(), True),
+#     StructField("month", IntegerType(), True)
+# ])
+
+# df = spark.read.schema(schema).csv("hdfs://namenode:9000/time")
 df = spark.read.option("header", "true").csv("hdfs://namenode:9000/time")
+
+
+# Lấy giá trị của dòng đầu tiên (nếu có) từ DataFrame
 time = df.first()
 if time is not None:
     year = int(time["year"])
     month = int(time["month"])
-
+    
 def increase_time_def():
     global year
     global month
