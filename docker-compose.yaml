@@ -95,24 +95,43 @@ services:
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
 
+  # Existing DataNode (old DataNode)
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
     container_name: datanode
     environment:
-      SERVICE_PRECONDITION: "namenode:9870"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870"
     env_file:
       - ./hadoop/hadoop.env
     restart: always
     networks:
       flight_net:
+    ports:
+      - 9864:9864  # Cổng ngoài là 9864, cổng trong là 9864
     volumes:
       - hadoop_datanode:/hadoop/dfs/data
+
+  # New DataNode (DataNode1)
+  datanode1:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode1
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870"
+    env_file:
+      - ./hadoop/hadoop.env
+    restart: always
+    networks:
+      flight_net:
+    ports:
+      - 9865:9864  # Cổng ngoài là 9865, cổng trong là 9864
+    volumes:
+      - hadoop_datanode1:/hadoop/dfs/data
   
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
     container_name: resourcemanager
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 datanode1:9864"
     env_file:
       - ./hadoop/hadoop.env
     ports:
@@ -125,7 +144,7 @@ services:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
     container_name: nodemanager
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 datanode1:9864 resourcemanager:8088"
     env_file:
       - ./hadoop/hadoop.env
     restart: always
@@ -136,7 +155,7 @@ services:
     image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
     container_name: historyserver
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 datanode1:9864 resourcemanager:8088"
     env_file:
       - ./hadoop/hadoop.env
     ports:
@@ -183,7 +202,6 @@ services:
   # Superset
   superset:
     image: superset
-    # build: ./superset
     container_name: superset
     environment:
       - SUPERSET_SECRET_KEY=secret
@@ -204,6 +222,7 @@ volumes:
   airflow_scripts:
   hadoop_namenode:
   hadoop_datanode:
+  hadoop_datanode1:
   hadoop_historyserver:
   hive_metastore_postgresql:
   superset_data:
