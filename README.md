@@ -13,9 +13,8 @@
 </ul>
 
 ## Data flow
-  <img src="https://github.com/Tran-Ngoc-Bao/Process_Flight_Data/blob/master/pictures/system.png">
-  ![Data flow](pictures/flow.png)
 
+  <img src="pictures/system/">
 ## Deploy system
 #### 1. Should pull and build images before
 ```sh
