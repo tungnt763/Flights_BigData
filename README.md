@@ -14,7 +14,7 @@
 
 ## Data flow
 
-  <img src="pictures/system.png">
+  <img src="pictures/flow.png">
 
 ## Deploy system
 #### 1. Should pull and build images before
