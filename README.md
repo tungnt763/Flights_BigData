@@ -1,4 +1,4 @@
-# IT3943 - Project 3 - SOICT - HUST
+# IT3943 - Big Data - SOICT - HUST
 
 ## Introduction
 <ul>
