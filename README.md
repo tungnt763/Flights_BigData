@@ -66,19 +66,20 @@ trino://hive@trino:8080/hive
 
 ## Demo System
 ### YARN
-  <img style="width:100%;" src="https://github.com/Tran-Ngoc-Bao/Process_Flight_Data/blob/master/pictures/system/yarn.png">
+  <img style="width:100%;" src="pictures/system/yarn.png">
 
 ### Trino
-  <img style="width:100%;" src="https://github.com/Tran-Ngoc-Bao/Process_Flight_Data/blob/master/pictures/system/trino.png">
+  <img style="width:100%;" src="pictures/system/trino.png">
 
 ### Superset
-  <img style="width:100%;" src="https://github.com/Tran-Ngoc-Bao/Process_Flight_Data/blob/master/pictures/system/superset.png">
+  <img style="width:100%;" src="pictures/system/superset.png">
 
 ## Demo Output
 ### Analysis of Day of Month
-  <img style="width:100%;" src="https://github.com/Tran-Ngoc-Bao/Process_Flight_Data/blob/master/pictures/charts/ngay-trong-thang-2024-12-01T02-17-37.154Z.jpg">
+  <img style="width:100%;" src="pictures/charts/ngay-trong-thang-2024-12-01T02-17-37.154Z.jpg">
 
 ### Analysis of Month of Year
-  <img style="width:100%;" src="https://github.com/Tran-Ngoc-Bao/Process_Flight_Data/blob/master/pictures/charts/số-chuyến-bay-theo-thang-qua-cac-nam-2024-12-01T13-13-34.441Z.jpg">
+  <img style="width:100%;" src="pictures/charts/số-chuyến-bay-theo-thang-qua-cac-nam-2024-12-01T13-13-34.441Z.jpg">
 
 ## Report
+[Group17 Report](https://drive.google.com/file/d/1pJD0A-e81DKolsvueNOyPMnbSy_xJbRq/view?usp=drive_link)
